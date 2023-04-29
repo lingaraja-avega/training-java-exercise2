@@ -58,7 +58,7 @@ public class Bank {
 			}
 		}
 		if (isAccountNumber) {
-			System.out.println(getBalance(accountNo));
+			System.out.println("Balance: " + getBalance(accountNo));
 			return true;
 		} else
 			return false;
@@ -70,7 +70,6 @@ public class Bank {
 			if (account.getAccountNumber().equals(accountNo)) {
 				if(account.getBanlance() >= amount) {
 					account.setBanlance(account.getBanlance() - amount);
-					System.out.println(amount + " is withdraw");
 					return amount;
 				} else 
 					System.out.println("Insufficient Balance");
@@ -80,32 +79,14 @@ public class Bank {
 	} 
 
 	public void transferMoney(String fromAccount, String toAccount, double amount) {
-		boolean isMyAccount = false;
-
-
-		for (BankAccount account : bankAccount) {
-			if (account.getAccountNumber().equals(fromAccount)) {
-				if (account.getBanlance() >= amount) {
-					int myAccountBalance = account.getBanlance() - (int) amount;
-					account.setBanlance(myAccountBalance);
-					isMyAccount = true;
-				} else {
-					System.out.println("You not have sufficient balance!");
-					break;
-				}
-			}
+		if(checkAccount(fromAccount)) {
+			withdraw(fromAccount, (int)amount); 
 		}
-
-		for (BankAccount tranferAccount : bankAccount) {
-			if (tranferAccount.getAccountNumber().equals(toAccount) && isMyAccount) {
-				int tranferAccountBalance = tranferAccount.getBanlance() + (int) amount;
-				tranferAccount.setBanlance(tranferAccountBalance);
-				System.out.println(tranferAccount.getAccountName() + " account balace is " +tranferAccount.getBanlance());
-			}
-		}
-
 		
-
+		if(checkAccount(fromAccount)) {
+			System.out.println("Transcation is successful completed");	
+			deposit(toAccount, amount); 
+		}		
 	}
 
 	@Override

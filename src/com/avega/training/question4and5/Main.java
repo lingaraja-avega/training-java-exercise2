@@ -14,6 +14,8 @@ public class Main {
 //		System.out.println(bank.transferMoney("7316", "7317", 1500));
 //		System.out.println(bank.withdraw("7317", 500));
 		
+		bank.transferMoney("7316", "7317", 500.);
+		
 	}
 
 }
