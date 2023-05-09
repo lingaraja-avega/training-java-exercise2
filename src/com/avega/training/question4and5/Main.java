@@ -1,5 +1,8 @@
 package com.avega.training.question4and5;
 
+import javax.naming.InsufficientResourcesException;
+import javax.security.auth.login.AccountNotFoundException;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -14,7 +17,11 @@ public class Main {
 //		System.out.println(bank.transferMoney("7316", "7317", 1500));
 //		System.out.println(bank.withdraw("7317", 500));
 		
-		bank.transferMoney("7316", "7317", 500.);
+		try {
+			bank.transferMoney("7316", "7317", 500);
+		} catch (AccountNotFoundException | InsufficientResourcesException e) {
+			e.printStackTrace();
+		}
 		
 	}
 

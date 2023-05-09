@@ -2,6 +2,9 @@ package com.avega.training.question4and5;
 
 import java.util.Arrays;
 
+import javax.naming.InsufficientResourcesException;
+import javax.security.auth.login.AccountNotFoundException;
+
 public class Bank {
 
 	private BankAccount[] bankAccount;
@@ -23,26 +26,29 @@ public class Bank {
 		this.bankAccount = bankAccount;
 	}
 
-	public boolean checkAccount(String accountNo) {
+	public BankAccount checkAccount(String accountNo) throws AccountNotFoundException {
+		BankAccount accountAccount = null;
 		boolean isAccountNumber = false;
 		for (BankAccount account : bankAccount) {
 			if (account.getAccountNumber().equals(accountNo)) {
 				isAccountNumber = true;
+				accountAccount = account;
 				break;
 			}
 
 		}
 		if (isAccountNumber)
-			return true;
+			return accountAccount;
 		else
-			return false;
+			throw new AccountNotFoundException("You entered account is not avaiable in the bank");
 	}
 
 	public int getBalance(String accountNo) {
-		for (BankAccount account : bankAccount) {
-			if (account.getAccountNumber().equals(accountNo)) {
-				return account.getBanlance();
-			}
+		try {
+			BankAccount account = checkAccount(accountNo);
+			return account.getBanlance();
+		} catch (AccountNotFoundException e) {
+			e.printStackTrace();
 		}
 		return 0;
 	}
@@ -63,30 +69,24 @@ public class Bank {
 		} else
 			return false;
 	}
-	
-	
-	public int withdraw(String accountNo, int amount) {
-		for (BankAccount account : bankAccount) {
-			if (account.getAccountNumber().equals(accountNo)) {
-				if(account.getBanlance() >= amount) {
-					account.setBanlance(account.getBanlance() - amount);
-					return amount;
-				} else 
-					System.out.println("Insufficient Balance");
-			}
-		}
-		return 0;
-	} 
 
-	public void transferMoney(String fromAccount, String toAccount, double amount) {
-		if(checkAccount(fromAccount)) {
-			withdraw(fromAccount, (int)amount); 
+	public int withdraw(String accountNo, int amount) throws InsufficientResourcesException, AccountNotFoundException {
+		BankAccount account = checkAccount(accountNo);
+		int balance = getBalance(accountNo);
+		if (balance >= amount) {
+			account.setBanlance(account.getBanlance() - amount);
+			return amount;
+		} else {
+			throw new InsufficientResourcesException("Amount is greater than bank balance");
 		}
-		
-		if(checkAccount(fromAccount)) {
-			System.out.println("Transcation is successful completed");	
-			deposit(toAccount, amount); 
-		}		
+	}
+
+	public void transferMoney(String fromAccount, String toAccount, double amount)
+			throws AccountNotFoundException, InsufficientResourcesException {
+		BankAccount sendAccount = checkAccount(fromAccount);
+		withdraw(sendAccount.getAccountNumber(), (int) amount);
+		BankAccount recAcc = checkAccount(toAccount);
+		deposit(recAcc.getAccountNumber(), amount);
 	}
 
 	@Override

@@ -1,10 +1,13 @@
 package com.avega.training.question4and5;
 
 public class BankAccount {
-
+	
+	public static int STARTING_AMOUNT = 1000; 
+		
+	
 	private String accountNumber;
 	private String accountName;
-	private int banlance = 1000;
+	private int banlance = STARTING_AMOUNT;
 
 	public BankAccount() {
 

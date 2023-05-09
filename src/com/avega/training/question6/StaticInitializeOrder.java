@@ -10,7 +10,7 @@ public class StaticInitializeOrder {
 	public static final int pincode = 600045;
 
 	public static void main(String[] args) {
-//		StaticInitializeOrder sio = new StaticInitializeOrder();
+		StaticInitializeOrder sio = new StaticInitializeOrder();
 	}
 }
 
