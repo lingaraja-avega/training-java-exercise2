@@ -1,6 +1,6 @@
-package com.avega.training.question7;
+package com.avega.training.exercise2;
 
-public class Main {
+public class CompanyMain {
 
 	public static void main(String[] args) {
 		Employee[] developersList = { new Employee(7316, "Lingesh", 12000, "Junior Developer"),

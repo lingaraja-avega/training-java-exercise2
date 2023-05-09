@@ -1,4 +1,4 @@
-package com.avega.training.question6;
+package com.avega.training.exercise2;
 
 public class StaticInitializeOrder {
 	public static final String place;

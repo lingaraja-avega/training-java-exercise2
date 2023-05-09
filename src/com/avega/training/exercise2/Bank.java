@@ -1,4 +1,4 @@
-package com.avega.training.question4and5;
+package com.avega.training.exercise2;
 
 import java.util.Arrays;
 

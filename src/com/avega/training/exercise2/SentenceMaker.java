@@ -1,4 +1,4 @@
-package com.avega.training.question9;
+package com.avega.training.exercise2;
 
 public class SentenceMaker {
 

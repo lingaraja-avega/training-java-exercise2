@@ -1,6 +1,6 @@
-package com.avega.training.question10;
+package com.avega.training.exercise2;
 
-public class Main {
+public class BatchMain {
 
 	public static void main(String[] args) {
 		Trainee[] batchOneTotal = { new Trainee(7316, "Lingesh", 9944519013L, "lingaraja@avegapro.com", "male", 23),

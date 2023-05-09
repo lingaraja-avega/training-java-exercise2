@@ -1,4 +1,4 @@
-package com.avega.training.question1and2and3;
+package com.avega.training.exercise2;
 
 public class ThirdQuestion {
 	public static void main(String[] args) {
